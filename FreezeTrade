@@ -67,5 +67,536 @@ loadstring(game:HttpGet("https://pastefy.app/hs1tdLZf/raw"))()
 end)
 task.spawn(function()
 task.wait(5)
-loadstring(game:HttpGet("https://pastefy.app/qu8SVbRc/raw"))()
+-- FLIPY'S TRADE MACHINE V4.1
+-- GUI Profesional Circular con animación de entrada
+
+-- Variables globales
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+-- Crear ScreenGui principal (Individual)
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "FlipysTradeMachine"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Frame principal circular con animación de entrada
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 240, 0, 240)
+MainFrame.Position = UDim2.new(0.5, -120, 0.5, -120)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
+MainFrame.BackgroundTransparency = 1
+MainFrame.BorderSizePixel = 0
+MainFrame.ClipsDescendants = true
+MainFrame.Parent = ScreenGui
+
+-- Efecto de borde circular sutil
+local Border = Instance.new("UIStroke")
+Border.Name = "Border"
+Border.Color = Color3.fromRGB(0, 150, 255)
+Border.Thickness = 2
+Border.Transparency = 1
+Border.Parent = MainFrame
+
+-- Fondo circular con gradiente
+local Background = Instance.new("Frame")
+Background.Name = "Background"
+Background.Size = UDim2.new(1, 0, 1, 0)
+Background.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+Background.BorderSizePixel = 0
+Background.Parent = MainFrame
+
+-- Esquinas completamente redondeadas para forma circular
+local Corner = Instance.new("UICorner")
+Corner.CornerRadius = UDim.new(1, 0) -- Completamente circular
+Corner.Parent = Background
+
+-- Sombra circular
+local Shadow = Instance.new("ImageLabel")
+Shadow.Name = "Shadow"
+Shadow.Size = UDim2.new(1, 40, 1, 40)
+Shadow.Position = UDim2.new(0, -20, 0, -20)
+Shadow.BackgroundTransparency = 1
+Shadow.Image = "rbxassetid://5554236805"
+Shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+Shadow.ImageTransparency = 0.8
+Shadow.ScaleType = Enum.ScaleType.Slice
+Shadow.SliceCenter = Rect.new(23, 23, 277, 277)
+Shadow.Parent = MainFrame
+
+-- Título con efecto neon (posicionado en la parte superior circular)
+local Title = Instance.new("TextLabel")
+Title.Name = "Title"
+Title.Size = UDim2.new(0.8, 0, 0, 40)
+Title.Position = UDim2.new(0.1, 0, 0.1, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "FLIPY'S TRADE MACHINE V4.1"
+Title.TextColor3 = Color3.fromRGB(0, 200, 255)
+Title.TextSize = 18
+Title.Font = Enum.Font.GothamBold
+Title.TextStrokeColor3 = Color3.fromRGB(0, 100, 150)
+Title.TextStrokeTransparency = 0.5
+Title.TextXAlignment = Enum.TextXAlignment.Center
+Title.Parent = MainFrame
+
+-- Subtítulo circular
+local Subtitle = Instance.new("TextLabel")
+Subtitle.Name = "Subtitle"
+Subtitle.Size = UDim2.new(0.7, 0, 0, 20)
+Subtitle.Position = UDim2.new(0.15, 0, 0.22, 0)
+Subtitle.BackgroundTransparency = 1
+Subtitle.Text = "Advanced Trading System"
+Subtitle.TextColor3 = Color3.fromRGB(150, 150, 200)
+Subtitle.TextSize = 12
+Subtitle.Font = Enum.Font.Gotham
+Subtitle.TextXAlignment = Enum.TextXAlignment.Center
+Subtitle.Parent = MainFrame
+
+-- Línea divisoria circular
+local Divider = Instance.new("Frame")
+Divider.Name = "Divider"
+Divider.Size = UDim2.new(0.7, 0, 0, 2)
+Divider.Position = UDim2.new(0.15, 0, 0.3, 0)
+Divider.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
+Divider.BorderSizePixel = 0
+Divider.Parent = MainFrame
+
+-- Contenedor de botones (ajustado para forma circular)
+local ButtonsContainer = Instance.new("Frame")
+ButtonsContainer.Name = "ButtonsContainer"
+ButtonsContainer.Size = UDim2.new(0.8, 0, 0.45, 0)
+ButtonsContainer.Position = UDim2.new(0.1, 0, 0.35, 0)
+ButtonsContainer.BackgroundTransparency = 1
+ButtonsContainer.Parent = MainFrame
+
+-- Botón Freeze Trade (circular compatible)
+local FreezeButton = Instance.new("TextButton")
+FreezeButton.Name = "FreezeButton"
+FreezeButton.Size = UDim2.new(1, 0, 0.45, 0)
+FreezeButton.Position = UDim2.new(0, 0, 0, 0)
+FreezeButton.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+FreezeButton.AutoButtonColor = false
+FreezeButton.Text = ""
+FreezeButton.Parent = ButtonsContainer
+
+local FreezeCorner = Instance.new("UICorner")
+FreezeCorner.CornerRadius = UDim.new(0, 12)
+FreezeCorner.Parent = FreezeButton
+
+local FreezeStroke = Instance.new("UIStroke")
+FreezeStroke.Color = Color3.fromRGB(50, 50, 70)
+FreezeStroke.Thickness = 2
+FreezeStroke.Parent = FreezeButton
+
+local FreezeText = Instance.new("TextLabel")
+FreezeText.Name = "FreezeText"
+FreezeText.Size = UDim2.new(0.7, 0, 1, 0)
+FreezeText.Position = UDim2.new(0.05, 0, 0, 0)
+FreezeText.BackgroundTransparency = 1
+FreezeText.Text = "FREEZE TRADE"
+FreezeText.TextColor3 = Color3.fromRGB(255, 100, 100)
+FreezeText.TextSize = 16
+FreezeText.Font = Enum.Font.GothamBold
+FreezeText.TextXAlignment = Enum.TextXAlignment.Left
+FreezeText.Parent = FreezeButton
+
+-- Indicador de estado Freeze (rojo) - posición ajustada
+local FreezeIndicator = Instance.new("Frame")
+FreezeIndicator.Name = "FreezeIndicator"
+FreezeIndicator.Size = UDim2.new(0, 16, 0, 16)
+FreezeIndicator.Position = UDim2.new(0.85, -8, 0.5, -8)
+FreezeIndicator.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+FreezeIndicator.BorderSizePixel = 0
+FreezeIndicator.Parent = FreezeButton
+
+local FreezeIndicatorCorner = Instance.new("UICorner")
+FreezeIndicatorCorner.CornerRadius = UDim.new(1, 0)
+FreezeIndicatorCorner.Parent = FreezeIndicator
+
+local FreezeIndicatorGlow = Instance.new("ImageLabel")
+FreezeIndicatorGlow.Name = "Glow"
+FreezeIndicatorGlow.Size = UDim2.new(1.5, 0, 1.5, 0)
+FreezeIndicatorGlow.Position = UDim2.new(-0.25, 0, -0.25, 0)
+FreezeIndicatorGlow.BackgroundTransparency = 1
+FreezeIndicatorGlow.Image = "rbxassetid://5028857084"
+FreezeIndicatorGlow.ImageColor3 = Color3.fromRGB(255, 50, 50)
+FreezeIndicatorGlow.ImageTransparency = 0.7
+FreezeIndicatorGlow.Parent = FreezeIndicator
+
+-- Botón Force Accept (circular compatible)
+local ForceButton = Instance.new("TextButton")
+ForceButton.Name = "ForceButton"
+ForceButton.Size = UDim2.new(1, 0, 0.45, 0)
+ForceButton.Position = UDim2.new(0, 0, 0.55, 0)
+ForceButton.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+ForceButton.AutoButtonColor = false
+ForceButton.Text = ""
+ForceButton.Parent = ButtonsContainer
+
+local ForceCorner = Instance.new("UICorner")
+ForceCorner.CornerRadius = UDim.new(0, 12)
+ForceCorner.Parent = ForceButton
+
+local ForceStroke = Instance.new("UIStroke")
+ForceStroke.Color = Color3.fromRGB(50, 50, 70)
+ForceStroke.Thickness = 2
+ForceStroke.Parent = ForceButton
+
+local ForceText = Instance.new("TextLabel")
+ForceText.Name = "ForceText"
+ForceText.Size = UDim2.new(0.7, 0, 1, 0)
+ForceText.Position = UDim2.new(0.05, 0, 0, 0)
+ForceText.BackgroundTransparency = 1
+ForceText.Text = "FORCE ACCEPT"
+ForceText.TextColor3 = Color3.fromRGB(100, 255, 100)
+ForceText.TextSize = 16
+ForceText.Font = Enum.Font.GothamBold
+ForceText.TextXAlignment = Enum.TextXAlignment.Left
+ForceText.Parent = ForceButton
+
+-- Indicador de estado Force (verde) - posición ajustada
+local ForceIndicator = Instance.new("Frame")
+ForceIndicator.Name = "ForceIndicator"
+ForceIndicator.Size = UDim2.new(0, 16, 0, 16)
+ForceIndicator.Position = UDim2.new(0.85, -8, 0.5, -8)
+ForceIndicator.BackgroundColor3 = Color3.fromRGB(50, 255, 50)
+ForceIndicator.BorderSizePixel = 0
+ForceIndicator.Parent = ForceButton
+
+local ForceIndicatorCorner = Instance.new("UICorner")
+ForceIndicatorCorner.CornerRadius = UDim.new(1, 0)
+ForceIndicatorCorner.Parent = ForceIndicator
+
+local ForceIndicatorGlow = Instance.new("ImageLabel")
+ForceIndicatorGlow.Name = "Glow"
+ForceIndicatorGlow.Size = UDim2.new(1.5, 0, 1.5, 0)
+ForceIndicatorGlow.Position = UDim2.new(-0.25, 0, -0.25, 0)
+ForceIndicatorGlow.BackgroundTransparency = 1
+ForceIndicatorGlow.Image = "rbxassetid://5028857084"
+ForceIndicatorGlow.ImageColor3 = Color3.fromRGB(50, 255, 50)
+ForceIndicatorGlow.ImageTransparency = 0.7
+ForceIndicatorGlow.Parent = ForceIndicator
+
+-- Texto de estado (en la parte inferior circular)
+local StatusText = Instance.new("TextLabel")
+StatusText.Name = "StatusText"
+StatusText.Size = UDim2.new(0.8, 0, 0, 25)
+StatusText.Position = UDim2.new(0.1, 0, 0.85, 0)
+StatusText.BackgroundTransparency = 1
+StatusText.Text = "System Ready"
+StatusText.TextColor3 = Color3.fromRGB(150, 200, 255)
+StatusText.TextSize = 14
+StatusText.Font = Enum.Font.Gotham
+StatusText.TextXAlignment = Enum.TextXAlignment.Center
+StatusText.Parent = MainFrame
+
+-- Variables de estado
+local freezeActive = false
+local forceActive = false
+local dragging = false
+local dragStartPos
+local guiStartPos
+
+-- Función para animación de entrada circular
+local function playEntranceAnimation()
+    local entranceTime = 0.5
+    
+    -- Animación de fade in
+    local fadeInTween = TweenService:Create(MainFrame, TweenInfo.new(entranceTime), {
+        BackgroundTransparency = 0
+    })
+    
+    -- Animación de borde
+    local borderTween = TweenService:Create(Border, TweenInfo.new(entranceTime), {
+        Transparency = 0
+    })
+    
+    -- Animación de escala circular (efecto pop desde el centro)
+    MainFrame.Size = UDim2.new(0, 10, 0, 10)
+    MainFrame.Position = UDim2.new(0.5, -5, 0.5, -5)
+    
+    local scaleTween = TweenService:Create(MainFrame, TweenInfo.new(entranceTime, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+        Size = UDim2.new(0, 240, 0, 240),
+        Position = UDim2.new(0.5, -120, 0.5, -120)
+    })
+    
+    -- Ejecutar animaciones
+    fadeInTween:Play()
+    borderTween:Play()
+    scaleTween:Play()
+    
+    -- Efecto de brillo en título (pulsante)
+    task.spawn(function()
+        for i = 1, 3 do
+            local glowTween1 = TweenService:Create(Title, TweenInfo.new(0.3), {
+                TextStrokeTransparency = 0.2
+            })
+            local glowTween2 = TweenService:Create(Title, TweenInfo.new(0.3), {
+                TextStrokeTransparency = 0.5
+            })
+            glowTween1:Play()
+            task.wait(0.3)
+            glowTween2:Play()
+            task.wait(0.3)
+        end
+    end)
+    
+    -- Animación de rotación sutil para efecto dinámico
+    task.spawn(function()
+        local rotationTween = TweenService:Create(MainFrame, TweenInfo.new(entranceTime * 1.5), {
+            Rotation = 5
+        })
+        local rotationBackTween = TweenService:Create(MainFrame, TweenInfo.new(entranceTime * 1.5), {
+            Rotation = -5
+        })
+        local rotationResetTween = TweenService:Create(MainFrame, TweenInfo.new(entranceTime * 1.5), {
+            Rotation = 0
+        })
+        
+        rotationTween:Play()
+        task.wait(entranceTime * 1.5)
+        rotationBackTween:Play()
+        task.wait(entranceTime * 1.5)
+        rotationResetTween:Play()
+    end)
+end
+
+-- Función para actualizar indicadores
+local function updateIndicators()
+    -- Actualizar Freeze Indicator
+    if freezeActive then
+        FreezeIndicator.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+        FreezeIndicatorGlow.ImageColor3 = Color3.fromRGB(255, 50, 50)
+        FreezeText.TextColor3 = Color3.fromRGB(255, 150, 150)
+        StatusText.Text = "Trade Frozen"
+    else
+        FreezeIndicator.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
+        FreezeIndicatorGlow.ImageColor3 = Color3.fromRGB(100, 30, 30)
+        FreezeText.TextColor3 = Color3.fromRGB(255, 100, 100)
+        StatusText.Text = "System Ready"
+    end
+    
+    -- Actualizar Force Indicator
+    if forceActive then
+        ForceIndicator.BackgroundColor3 = Color3.fromRGB(50, 255, 50)
+        ForceIndicatorGlow.ImageColor3 = Color3.fromRGB(50, 255, 50)
+        ForceText.TextColor3 = Color3.fromRGB(150, 255, 150)
+        StatusText.Text = "Force Accept Active"
+    else
+        ForceIndicator.BackgroundColor3 = Color3.fromRGB(30, 100, 30)
+        ForceIndicatorGlow.ImageColor3 = Color3.fromRGB(30, 100, 30)
+        ForceText.TextColor3 = Color3.fromRGB(100, 255, 100)
+        StatusText.Text = "System Ready"
+    end
+    
+    -- Si ambos están activos
+    if freezeActive and forceActive then
+        StatusText.Text = "Both Systems Active"
+    end
+end
+
+-- Funciones para efectos de hover en botones
+local function setupButtonHoverEffects()
+    -- Efecto hover para FreezeButton
+    FreezeButton.MouseEnter:Connect(function()
+        if not freezeActive then
+            TweenService:Create(FreezeButton, TweenInfo.new(0.2), {
+                BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+            }):Play()
+            TweenService:Create(FreezeStroke, TweenInfo.new(0.2), {
+                Color = Color3.fromRGB(255, 100, 100)
+            }):Play()
+        end
+    end)
+    
+    FreezeButton.MouseLeave:Connect(function()
+        if not freezeActive then
+            TweenService:Create(FreezeButton, TweenInfo.new(0.2), {
+                BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+            }):Play()
+            TweenService:Create(FreezeStroke, TweenInfo.new(0.2), {
+                Color = Color3.fromRGB(50, 50, 70)
+            }):Play()
+        end
+    end)
+    
+    -- Efecto hover para ForceButton
+    ForceButton.MouseEnter:Connect(function()
+        if not forceActive then
+            TweenService:Create(ForceButton, TweenInfo.new(0.2), {
+                BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+            }):Play()
+            TweenService:Create(ForceStroke, TweenInfo.new(0.2), {
+                Color = Color3.fromRGB(100, 255, 100)
+            }):Play()
+        end
+    end)
+    
+    ForceButton.MouseLeave:Connect(function()
+        if not forceActive then
+            TweenService:Create(ForceButton, TweenInfo.new(0.2), {
+                BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+            }):Play()
+            TweenService:Create(ForceStroke, TweenInfo.new(0.2), {
+                Color = Color3.fromRGB(50, 50, 70)
+            }):Play()
+        end
+    end)
+end
+
+-- Funcionalidad de botones (sin funcionalidad real como solicitado)
+FreezeButton.MouseButton1Click:Connect(function()
+    freezeActive = not freezeActive
+    
+    -- Efecto de clic con ligera escala
+    TweenService:Create(FreezeButton, TweenInfo.new(0.1), {
+        Size = UDim2.new(0.95, 0, 0.43, 0),
+        Position = UDim2.new(0.025, 0, 0.01, 0),
+        BackgroundColor3 = freezeActive and Color3.fromRGB(50, 30, 30) or Color3.fromRGB(40, 40, 50)
+    }):Play()
+    
+    task.wait(0.1)
+    
+    TweenService:Create(FreezeButton, TweenInfo.new(0.2), {
+        Size = UDim2.new(1, 0, 0.45, 0),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = freezeActive and Color3.fromRGB(40, 30, 30) or Color3.fromRGB(30, 30, 40)
+    }):Play()
+    
+    if freezeActive then
+        TweenService:Create(FreezeStroke, TweenInfo.new(0.2), {
+            Color = Color3.fromRGB(255, 50, 50)
+        }):Play()
+    else
+        TweenService:Create(FreezeStroke, TweenInfo.new(0.2), {
+            Color = Color3.fromRGB(50, 50, 70)
+        }):Play()
+    end
+    
+    updateIndicators()
+end)
+
+ForceButton.MouseButton1Click:Connect(function()
+    forceActive = not forceActive
+    
+    -- Efecto de clic con ligera escala
+    TweenService:Create(ForceButton, TweenInfo.new(0.1), {
+        Size = UDim2.new(0.95, 0, 0.43, 0),
+        Position = UDim2.new(0.025, 0, 0.56, 0),
+        BackgroundColor3 = forceActive and Color3.fromRGB(30, 50, 30) or Color3.fromRGB(40, 40, 50)
+    }):Play()
+    
+    task.wait(0.1)
+    
+    TweenService:Create(ForceButton, TweenInfo.new(0.2), {
+        Size = UDim2.new(1, 0, 0.45, 0),
+        Position = UDim2.new(0, 0, 0.55, 0),
+        BackgroundColor3 = forceActive and Color3.fromRGB(30, 40, 30) or Color3.fromRGB(30, 30, 40)
+    }):Play()
+    
+    if forceActive then
+        TweenService:Create(ForceStroke, TweenInfo.new(0.2), {
+            Color = Color3.fromRGB(50, 255, 50)
+        }):Play()
+    else
+        TweenService:Create(ForceStroke, TweenInfo.new(0.2), {
+            Color = Color3.fromRGB(50, 50, 70)
+        }):Play()
+    end
+    
+    updateIndicators()
+end)
+
+-- Sistema de arrastre individual (compatible con PC y celular, sin afectar cámara)
+local function setupDragging()
+    local function updateDrag(input)
+        if dragging then
+            local delta = input.Position - dragStartPos
+            MainFrame.Position = UDim2.new(
+                guiStartPos.X.Scale,
+                guiStartPos.X.Offset + delta.X,
+                guiStartPos.Y.Scale,
+                guiStartPos.Y.Offset + delta.Y
+            )
+            MainFrame.Rotation = delta.X * 0.1
+        end
+    end
+
+    -- Iniciar arrastre (PC con mouse o celular con touch)
+    MainFrame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 
+        or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStartPos = input.Position
+            guiStartPos = MainFrame.Position
+
+            -- Evitar que el input afecte la cámara
+            input.UserInputState = Enum.UserInputState.Begin
+
+            TweenService:Create(MainFrame, TweenInfo.new(0.1), {
+                BackgroundTransparency = 0.1
+            }):Play()
+
+            local connection
+            connection = RunService.RenderStepped:Connect(function()
+                if dragging then
+                    updateDrag(input)
+                else
+                    connection:Disconnect()
+                end
+            end)
+        end
+    end)
+
+    -- Finalizar arrastre (PC y celular)
+    UserInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 
+        or input.UserInputType == Enum.UserInputType.Touch then
+            if dragging then
+                dragging = false
+                TweenService:Create(MainFrame, TweenInfo.new(0.1), {
+                    BackgroundTransparency = 0
+                }):Play()
+
+                local currentPos = MainFrame.Position
+                TweenService:Create(MainFrame, TweenInfo.new(0.15), {
+                    Position = UDim2.new(
+                        currentPos.X.Scale,
+                        currentPos.X.Offset + math.random(-8, 8),
+                        currentPos.Y.Scale,
+                        currentPos.Y.Offset + math.random(-8, 8)
+                    ),
+                    Rotation = math.random(-3, 3)
+                }):Play()
+
+                task.wait(0.15)
+
+                TweenService:Create(MainFrame, TweenInfo.new(0.15), {
+                    Position = currentPos,
+                    Rotation = 0
+                }):Play()
+            end
+        end
+    end)
+end
+
+-- Inicialización
+setupButtonHoverEffects()
+setupDragging()
+playEntranceAnimation()
+updateIndicators()
+
+-- Mensaje de confirmación en consola
+print("FLIPY'S TRADE MACHINE V4.1 (Circular Edition) loaded successfully!")
+print("Circular GUI is now active and draggable (does not affect camera)")
+print("Buttons toggle visual indicators only (no functionality)")
+
+-- Retornar la GUI para referencia externa si es necesario
+return ScreenGui
+
 end)
